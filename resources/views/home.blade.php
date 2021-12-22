@@ -10,7 +10,7 @@
 <body>
     <h1>This is example from ItSolutionStuff.com</h1>
     <div id="app">
-        <example-component></example-component>
+        <example-component home-route="{{ route('api:product-store') }}"></example-component>
     </div>
 </body>
 </html>
