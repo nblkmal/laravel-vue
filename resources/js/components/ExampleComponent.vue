@@ -10,9 +10,10 @@
                         <input v-model="message" placeholder="edit me">
                         <p>Message is: {{ message }}</p>
                         <div class="list-group">
-                            <a href="" class="list-group-item" v-for="product in products">
+                            <a href="" class="list-group-item" v-for="product in products" :key="product.id">
                                 {{ product.name }}
                             </a>
+                            <button class="btn btn-danger">Delete</button>
                         </div>
                     </div>
                     <div class="card-body">
@@ -75,7 +76,6 @@
             submit() {
                 // post to endpoint
                 axios.post( this.homeRoute, this.fields )
-                // axios.post('/api/products/store', this.fields)
                 .then(response => {
                     this.fields = {};
                     console.log(this.fields);
