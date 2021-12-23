@@ -2,6 +2,8 @@
 <html>
 <head>
     <!-- Scripts -->
+
+    @routes
     <script src="{{ asset('js/app.js') }}" defer></script>
    
     <!-- Styles -->
@@ -10,7 +12,7 @@
 <body>
     <h1>This is example from ItSolutionStuff.com</h1>
     <div id="app">
-        <example-component home-route="{{ route('api:product-store') }}"></example-component>
+        <example-component></example-component>
     </div>
 </body>
 </html>
