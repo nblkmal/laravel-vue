@@ -12,11 +12,12 @@
                         <div class="list-group">
                             <a href="" class="list-group-item" v-for="product in products" :key="product.id">
                                 {{ product.name }}
+                                <a class="btn btn-danger" href="#" @click.prevent="deleteProduct(product.id)" >Delete</a>
                             </a>
-                            <button class="btn btn-danger">Delete</button>
                         </div>
                     </div>
                     <div class="card-body">
+
                         <form @submit.prevent="submit">
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
@@ -43,7 +44,6 @@
 <script>
     export default {
 
-        props: ['homeRoute'],
 
         data: function() {
             return {
@@ -56,30 +56,44 @@
         },
 
         mounted() {
-            console.log('Component mounted.'),
+            console.log('Component mounted.')
+
             this.loadProducts();
         },
 
         methods: {
             loadProducts: function() {
                 // load from API
-                axios.get('/api/products')
+                axios.get(route('api:product-index'))
                 .then((response) => {
                     this.products = response.data.data;
                 })
                 .catch(function (error) {
                     console.log(error);
                 });
-                // assign
-                // catch errors
             },
+
             submit() {
                 // post to endpoint
-                axios.post( this.homeRoute, this.fields )
+                axios.post( route('api:product-store'), this.fields )
                 .then(response => {
                     this.fields = {};
+
+                    this.loadProducts(); 
+
                     console.log(this.fields);
                 }).catch(error => {
+                    console.log(error);
+                })
+            },
+
+            deleteProduct(id) {
+                axios.delete( route('api:product-delete', id))
+                .then(response => {
+                    this.loadProducts();
+                    console.log("delete success");
+                })
+                .catch(error => {
                     console.log(error);
                 })
             }
