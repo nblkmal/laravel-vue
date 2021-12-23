@@ -31,4 +31,11 @@ class ProductController extends Controller
         
         return $product;
     }
+
+    public function delete(Product $product)
+    {
+        $product->delete();
+
+        return $product;
+    }
 }
